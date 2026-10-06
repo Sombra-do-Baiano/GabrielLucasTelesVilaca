@@ -5,8 +5,18 @@
  * INICIANTE 1,00; REGULAR 1,00; ENGAJADO 0,95; BINGE 1,10.
  */
 public enum Engajamento {
-    INICIANTE, REGULAR, ENGAJADO, BINGE;
+    INICIANTE(1), 
+    REGULAR(1), 
+    ENGAJADO(0.95), 
+    BINGE(1.1);
 
-    //TODO Tarefa 1: associar a cada constante seu fator de tarifa
-    // (atributo, construtor e método getFator())
+    public double fator;
+
+    private Engajamento(double fator) {
+        this.fator = fator;
+    }
+
+    public double getFator(){
+        return this.fator;
+    }
 }

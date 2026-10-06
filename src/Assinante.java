@@ -76,8 +76,19 @@ public class Assinante {
      * Lista vazia → INICIANTE.
      */
     public Engajamento classificacaoEngajamento() {
-        //TODO Tarefa 2
-        return Engajamento.INICIANTE;
+        double proporcao = (double)(tempoTotalAssistido())/(tempoTotalAssistido()+creditoDeTempo());
+        if(proporcao<=0.10){
+            return Engajamento.INICIANTE;
+        }
+        else if(proporcao <= 0.50){
+            return Engajamento.REGULAR;
+        }
+        else if(proporcao <= 0.75){
+            return Engajamento.ENGAJADO;
+        }
+        else{
+            return Engajamento.BINGE;
+        }
     }
 
     /**
@@ -85,8 +96,17 @@ public class Assinante {
      * caso contrário, TARIFA_BASE multiplicada pelo fator da classificação.
      */
     public double tarifaMensal() {
-        //TODO Tarefa 3
-        return 0.0;
+        double tarifa = TARIFA_BASE;
+        double totalWatchTime = tempoTotalAssistido();
+
+        // Como vimos, poderia ter sido mais um enum, mas eu vou assumir que isso vai quebrar o código e fazer o jeito que pediu
+        if(totalWatchTime>=600){
+            tarifa = 0 * TARIFA_BASE;
+        }
+        else{
+            tarifa = classificacaoEngajamento().getFator() * TARIFA_BASE;
+        }
+        return tarifa;
     }
 
     public String resumo() {
